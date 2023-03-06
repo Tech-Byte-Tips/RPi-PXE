@@ -56,7 +56,8 @@ echo -e $BLACK
 
 # Validate it's run as root
 if [ $(id -u) -ne 0 ]; then
-  errexit $RED"You must run RPI-PXE-Server as root user, like this: sudo $0"
+  echo -e $RED"You must run RPI-PXE-Server as root user, like this: sudo $0"
+  exit 1
 fi
 
 echo
@@ -67,7 +68,8 @@ echo
 apt-get update -y > /dev/null
 showSpinner
 if [ $? -ne 0 ]; then
-  errexit $RED"[!] An error occurred while updating the package indexes!"
+  echo -e $RED"[!] An error occurred while updating the package indexes!"
+  exit 1
 fi
 
 echo
@@ -80,7 +82,8 @@ showSpinner
 apt-get dist-upgrade -y > /dev/null
 showSpinner
 if [ $? -ne 0 ]; then
-  errexit $RED"[!] An error occurred while upgrading the packages and system!"
+  echo -e $RED"[!] An error occurred while upgrading the packages and system!"
+  exit 1
 fi
 
 echo
@@ -91,7 +94,8 @@ echo
 #sudo apt install nfs-kernel-server -y > /dev/null
 showSpinner
 if [ $? -ne 0 ]; then
-  errexit $RED"[!] An error occurred while installing the NFS Kernel Server!"
+  echo -e $RED"[!] An error occurred while installing the NFS Kernel Server!"
+  exit 1
 fi
 
 echo
@@ -102,7 +106,8 @@ echo
 #sudo apt install dnsmasq -y > /dev/null
 showSpinner
 if [ $? -ne 0 ]; then
-  errexit $RED"[!] An error occurred while installing the NFS Kernel Server!"
+  echo -e $RED"[!] An error occurred while installing the NFS Kernel Server!"
+  exit 1
 fi
 
 echo -e $BLACK'Creating file structure to serve ...'
