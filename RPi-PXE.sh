@@ -204,7 +204,7 @@ deployImage(){
       mkdir /NFSPXE/boot/${SERIALNUMBER}
       echo
       echo " Copying boot files from /NFSPXE/images/boot/${IMAGENAME} to folder /NFSPXE/boot/${SERIALNUMBER}"
-      #sudo cp -r /NFSPXE/images/boot/${IMAGENAME}/* /NFSPXE/boot/${SERIALNUMBER}/
+      sudo cp -r /NFSPXE/images/boot/${IMAGENAME}/* /NFSPXE/boot/${SERIALNUMBER}/
     else
       echo -e $RED
       echo " [!] This serial number has already been provisioned.  Deprovision it before trying"
@@ -218,7 +218,7 @@ deployImage(){
     if [ ! -d /NFSPXE/filesystems/${SERIALNUMBER} ]; then
       echo 
       echo " Copying boot files from /NFSPXE/images/filesystems/${IMAGENAME} to folder /NFSPXE/filesystems/${SERIALNUMBER}"
-      #rsync -xa --progress /NFSPXE/images/filesystems/${IMAGENAME} /NFSPXE/filesystems/
+      rsync -xa --progress /NFSPXE/images/filesystems/${IMAGENAME} /NFSPXE/filesystems/
       sudo mv /NFSPXE/filesystems/${IMAGENAME} /NFSPXE/filesystems/${SERIALNUMBER}
     else
       echo -e $RED
