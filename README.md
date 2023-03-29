@@ -36,7 +36,7 @@ You can choose to hold the files in:
     
   * Step 2 - Run the Application
 
-    cd ~/RPi-PXE && sudo ./RPi-PXE.sh
+    cd ~/RPi-PXE && chmod +x RPi-PXE.sh && sudo ./RPi-PXE.sh
 
 # License
 
