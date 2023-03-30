@@ -36,7 +36,7 @@ changeHostname(){
   echo -e $YELLOW"What would you like to name this Raspberry Pi? : "$BLACK
   read HOSTNAME
 
-  hostname $HOSTNAME
+  echo $HOSTNAME > /etc/hostname
   echo
   echo -e $GREEN"Host name has been changed to $HOSTNAME"
 
