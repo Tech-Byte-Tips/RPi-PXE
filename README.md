@@ -8,6 +8,20 @@ You can also support me by sending a BitCoin donation to the following address:
 
 19JXFGfRUV4NedS5tBGfJhkfRrN2EQtxVo
 
+---
+
+# About this Branch
+
+This branch was created to preserve the state of the application (how it worked) before the introduction of the changes to the /boot partition by adding a /boot/firmware folder.
+
+It broke the network boot process and people in the community are trying to figure it out.
+
+From now on, the main branch will be adjusted to work with the latest version of the /boot partition.
+
+**If you are using an old image of the Raspbian OS, use this branch instead.**
+
+---
+
 # RPI-PXE
 
 A PXE Server for Raspberry Pis
