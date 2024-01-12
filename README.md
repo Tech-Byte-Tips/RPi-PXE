@@ -8,6 +8,20 @@ You can also support me by sending a BitCoin donation to the following address:
 
 19JXFGfRUV4NedS5tBGfJhkfRrN2EQtxVo
 
+---
+
+# About this Branch
+
+This branch will be modified for use with Raspberry Pi images using the /boot/firmware format.
+
+It broke the network boot process and people in the community are trying to figure it out.  Please, be patient while I try to find a way to get this working.
+
+From now on, if you plan to use an old image that uses the original /boot partition, you will have to use the old-boot branch of this repository.
+
+**If you are using a new image of the Raspbian OS (on or after bookworm), use this branch.**
+
+---
+
 # RPI-PXE
 
 A PXE Server for Raspberry Pis
