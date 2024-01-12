@@ -387,7 +387,7 @@ deployImage(){
 
     echo -e $YELLOW
     read -p " Do you want to restrict access to this filesystem? [y/n] : " RESTRICT    
-    if [ $RESTRICT == 'y' ] -or [ $RESTRICT == 'Y' ]; then
+    if [ $RESTRICT == 'y' ] || [ $RESTRICT == 'Y' ]; then
       echo
       echo " You can restrict access the following ways:"
       echo "   1. To a specific IP address [e.g. 10.0.0.30]"
