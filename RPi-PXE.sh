@@ -229,22 +229,25 @@ deployImage(){
     fi
 
     echo -e $YELLOW
+    echo -e " We need to make configurations to the cmdline.txt!"
     read -p " Please provide the IP of the NFS server [e.g. 10.0.0.50] : " NFSIP
     read -p " Please provide the NFS share mount point [e.g. /volume1/PXE] : " MOUNTPOINT
     echo -e $MAGENTA
     echo " Changing the /boot/cmdline.txt to boot from the NFS directory ..."
-    sed -i "s|\(^.*root=\).*$|\1/dev/nfs nfsroot=${NFSIP}:${MOUNTPOINT}/filesystems/${SERIALNUMBER},vers=4.1,proto=tcp rw ip=dhcp rootwait elevator=deadline|" "/NFSPXE/boot/${SERIALNUMBER}/cmdline.txt"
+    #sed -i "s|\(^.*root=\).*$|\1/dev/nfs nfsroot=${NFSIP}:${MOUNTPOINT}/filesystems/${SERIALNUMBER},vers=4.1,proto=tcp rw ip=dhcp rootwait elevator=deadline|" "/NFSPXE/boot/${SERIALNUMBER}/cmdline.txt"
+    # Temporarily using NFS v3
+    sed -i "s|\(^.*root=\).*$|\1/dev/nfs nfsroot=${NFSIP}:${MOUNTPOINT}/filesystems/${SERIALNUMBER},vers=3 rw ip=dhcp rootwait|" "/NFSPXE/boot/${SERIALNUMBER}/cmdline.txt"
   
     echo -e $MAGENTA
     echo " Clearing old mount directives from /etc/fstab ..."
-    sed -i '/ \/boot /d' "/NFSPXE/filesystems/${SERIALNUMBER}/etc/fstab"
+    sed -i '/\s\+\/boot\S*\s\+/d' "/NFSPXE/filesystems/${SERIALNUMBER}/etc/fstab"
     sed -i '/ \/ /d' "/NFSPXE/filesystems/${SERIALNUMBER}/etc/fstab"
 
     echo -e $MAGENTA
     echo " Adding new mount directives to /etc/fstab ..."
     echo "" >> "/NFSPXE/filesystems/${SERIALNUMBER}/etc/fstab"
     echo "# NFS Share - File System" >> "/NFSPXE/filesystems/${SERIALNUMBER}/etc/fstab"
-    echo "${NFSIP}:${MOUNTPOINT}/boot/${SERIALNUMBER} /boot nfs defaults,vers=4.1,proto=tcp 0 0" >> "/NFSPXE/filesystems/${SERIALNUMBER}/etc/fstab"
+    echo "${NFSIP}:${MOUNTPOINT}/boot/${SERIALNUMBER} /boot/firmware nfs defaults,vers=4.1,proto=tcp 0 0" >> "/NFSPXE/filesystems/${SERIALNUMBER}/etc/fstab"
     echo "${NFSIP}:${MOUNTPOINT}/filesystems/${SERIALNUMBER} /     nfs defaults,vers=4.1,proto=tcp 0 0" >> "/NFSPXE/filesystems/${SERIALNUMBER}/etc/fstab"
     echo "# NFS" >> "/NFSPXE/filesystems/${SERIALNUMBER}/etc/fstab"
 
@@ -260,6 +263,8 @@ deployImage(){
 
     echo
     echo " Making sure SSH is enabled ..."
+    # Fix SSH not being enabled by default by replacing boot.mount to boot-firmware.mount
+    sed -i 's/boot\.mount/boot-firmware.mount/' "/pxe-root/${SERIAL}/lib/systemd/system/sshswitch.service" &> /dev/null
     if [ "$(find "/NFSPXE/boot/${SERIALNUMBER}/" -type f -iregex "/NFSPXE/boot/${SERIALNUMBER}/ssh\(\.txt\)?" -print -delete)" != "" ]; then
       if [ $(grep -c 'pxe-enable-ssh' "/NFSPXE/filesystems/${SERIALNUMBER}/etc/rc.local") -eq 0 ]; then
         echo "
@@ -387,7 +392,7 @@ deployImage(){
 
     echo -e $YELLOW
     read -p " Do you want to restrict access to this filesystem? [y/n] : " RESTRICT    
-    if [ $RESTRICT == 'y' ] || [ $RESTRICT == 'Y' ]; then
+    if [ $RESTRICT == 'y' ] -or [ $RESTRICT == 'Y' ]; then
       echo
       echo " You can restrict access the following ways:"
       echo "   1. To a specific IP address [e.g. 10.0.0.30]"
@@ -505,7 +510,7 @@ identifyPis(){
   echo -e $CYAN "These are the Raspberry Pi devices found during the scan:"
   echo " -----------------------------------------------------------------------------------------------------------"
   # Print the list of Pis
-  arp -a | grep -E --ignore-case 'b8:27:eb|dc:a6:32' | awk '{print " "$1" "$2}'
+  arp -a | grep -E --ignore-case '28:cd:c1|3a:35:41|b8:27:eb|d8:3a:dd|dc:a6:32|e4:5f:01' | awk '{print " "$1" "$2}'
   echo " -----------------------------------------------------------------------------------------------------------"
 
   promptForEnter
@@ -1288,7 +1293,7 @@ makeImage(){
 
         echo
         echo 'Copying boot files ...'
-        cp -r /boot/* /PXE/images/boot/${IMAGENAME}
+        cp -r /boot/firmware/* /PXE/images/boot/${IMAGENAME}
 
         echo
         if [ ! -d /PXE/images/filesystems/${IMAGENAME} ]; then

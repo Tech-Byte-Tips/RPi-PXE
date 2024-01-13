@@ -20,6 +20,20 @@ From now on, if you plan to use an old image that uses the original /boot partit
 
 **If you are using a new image of the Raspbian OS (on or after bookworm), use this branch.**
 
+## Warning
+
+To overcome the issues brought by the new /boot partition, I am doing the following:
+
+  1. Copying the /boot/firmware folder to the /boot folder in the NAS, as that seems to be the new location
+  2. Using NFS v3 as 4+ is not supported in the Debian 12 port (bookworm) yet
+  3. Attempt to fix the SSH issue (not turned on even when a file is present)
+
+I've managed to get some Pis running relatively OK, but I've noticed that one specific kernel module fails to load.  It is the: systemd-remount-fs.service
+
+You might also have issues if you issue the reboot command to the Pi.  If you do, you need to power cycle it.
+
+I'll try to keep attention to the Raspberry Pi community forums for news about the issues being fixed.  If you find a post before me, I'd appreciate it if you let me know thorugh an Issue referencing the post.
+
 ---
 
 # RPI-PXE
