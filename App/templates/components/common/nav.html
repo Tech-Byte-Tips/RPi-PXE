@@ -1,0 +1,68 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
+  <div class="container">
+    <a class="navbar-brand">RPi-PXE Server v1.0.0</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        
+        <!-- Dashboard link -->
+        <li class="nav-item">
+          <a class="nav-link" href="/">
+            Dashboard
+          </a>
+        </li>
+
+        <!-- How To dropdown -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="/documentation/overview" id="navbarDropdownHowTo" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Documentation
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownHowTo">
+            <li><a class="dropdown-item" href="/documentation/overview">Overview</a></li>
+            <li><a class="dropdown-item" href="/documentation/docs">Documentation</a></li>
+            <li><a class="dropdown-item" href="/documentation/faq">FAQ</a></li>
+          </ul>
+        </li>
+
+        <!-- Manage Images dropdown -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownImages" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Manage Images
+          </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdownImages">
+            <li><a class="dropdown-item" href="/piimages/create">Create Image</a></li>
+            <li><a class="dropdown-item" href="/piimages/listimages">List Images</a></li>
+            <li><a class="dropdown-item" href="/piimages/deleteimage">Delete Image</a></li>
+          </ul>
+        </li>
+
+        <!-- Manage Pis dropdown -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPis" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Manage Pis
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownPis">
+            <li><a class="dropdown-item" href="/pis/find">Find Pis</a></li>
+            <li><a class="dropdown-item" href="/pis/provision">Provision Pi</a></li>
+            <li><a class="dropdown-item" href="/pis">List Provisioned Pis</a></li>
+            <li><a class="dropdown-item" href="/pis/deprovision">Deprovision Pi</a></li>
+          </ul>
+        </li>
+
+        <!-- Settings dropdown -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownSettings" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Settings
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownSettings">
+            <li><a class="dropdown-item" href="/settings/general">General</a></li>
+            <li><a class="dropdown-item" href="/settings/mountlocaldisk">Mount Local Disk</a></li>
+            <li><a class="dropdown-item" href="/settings/reset">Reset System</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

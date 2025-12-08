@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>RPi-PXE</title>
+  <!-- Bootstrap CSS (local copy) -->
+  <link href="{{ url_for('serve_libs', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+  </head>
+  <body style="padding-bottom:4rem;">
+
+    {# Include the fixed navbar component #}
+    {% include 'components/common/nav.html' %}
+
+    <!-- Page layout with a left sidebar column for the logo that doesn't interfere with main content -->
+    <div class="container-fluid">
+      <div class="row">
+
+        <!-- Sidebar column: visible on md+ screens, hidden on small screens to avoid crowding -->
+        <aside class="col-12 col-md-2 d-none d-md-flex flex-column align-items-center" style="min-height:1px;">
+          <div class="p-3 text-center w-100">
+            <img src="{{ url_for('serve_images', filename='Logo.png') }}" alt="RPi-PXE Server" class="img-fluid mb-2" style="max-height:250px; width:auto;">
+            <div class="mt-2">
+              <div class="small text-muted mb-1">Support the project:</div>
+              <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=53CD2WNX3698E&lc=US&item_name=PREngineer&item_number=RPi-PXE-Server&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted" target="_blank" rel="noopener" class="d-inline-block">
+                <img src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" alt="Donate with PayPal" class="img-fluid" style="max-width:100%; height:auto;">
+              </a>
+            </div>
+          </div>
+        </aside>
+
+        <!-- Main content column -->
+        <main class="col-12 col-md-10">
+          <div class="container mt-3">
+            {# Top section with heading and card #}
+            {% if include_template is not defined %}
+              {% set include_template = 'components/dashboard/dashboard.html' %}
+            {% endif %}
+            {% include include_template %}
+        </main>
+
+        {# Include the fixed footer component #}
+        {% include 'components/common/footer.html' %}
+      </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle (local copy) -->
+    <script src="{{ url_for('serve_libs', filename='js/bootstrap.bundle.min.js') }}"></script>
+
+  </body>
+</html>
