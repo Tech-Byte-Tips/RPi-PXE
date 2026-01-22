@@ -39,6 +39,8 @@ You can choose to hold the files in:
   1. An attached storage device in your Raspberry Pi
   2. A NAS server in your network (recommended)
 
+Development progress is being tracked in this [Kanban board](https://kanboard.techbytetips.com/public/board/087415f16ea8d1ecaa59796114e631c8bd6bad1852611637173d8145cffe).
+
 ## How to Install
 
   * To Do
